@@ -10,11 +10,34 @@ while(index < numOfBoxes){
             'flex-grow: 1; margin: 0px;';
         root.appendChild(break_line);
     }else{
-        const sketch = document.createElement('div');
+        const sketch = document.createElement('button');
+        sketch.className = 'sketch';
         sketch.style.cssText = 'border: 1px solid black;' + 
-            'height: 30px;' + 
-            'width: 30px;' + 
+            'height: 40px;' + 
+            'width: 40px;' + 
             'margin: 0px;';
         root.appendChild(sketch);
     }
 }
+
+const sketchList = document.querySelectorAll('.sketch');
+
+let pressed = false;
+
+window.addEventListener("mousedown", () =>{pressed = true;});
+
+window.addEventListener("mouseup", () =>{pressed = false;});
+
+sketchList.forEach(sketch => {
+    sketch.addEventListener("mouseover", () => {
+        if (pressed){
+        sketch.style.cssText = 'border: 1px solid black;' + 
+        'height: 40px;' + 
+        'width: 40px;' + 
+        'margin: 0px;'+ 
+        'background: blue;';
+        }
+    });
+});
+
+
