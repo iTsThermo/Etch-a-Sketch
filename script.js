@@ -36,21 +36,19 @@ sketchList.forEach(sketch => {
         'background: #DCFFB7;';
         }
     });
-})
+});
 
 let pressed = false;
 window.addEventListener("mousedown", () =>{pressed = true;});
 window.addEventListener("mouseup", () =>{pressed = false;});
 
-function reset(){
-    const removeSketchList = document.querySelectorAll('.sketch');
-    removeSketchList.forEach(sketch =>{
-        sketch.remove();
-    });
-}
+function clearGrid(){
+clear.addEventListener('click', ()=>{
+    sketchList.forEach(sketch=>{sketch.style.backgroundColor = '#424242';
+})})};
 
 const clear = document.getElementById('clear');
-clear.addEventListener('click', reset);
+clear.addEventListener('click', clearGrid());
 
 sketchList.forEach(sketch => {
     sketch.addEventListener("mouseover", () => {
@@ -62,15 +60,16 @@ sketchList.forEach(sketch => {
             'background: #DCFFB7;';
         }
     });
-    clear.addEventListener('click', reset);
+    clear.addEventListener('click', clearGrid());
 });
+
 }
 
 const slider = document.getElementById('slide');
 slider.addEventListener("input", function() {
     Gridremove();
     grid(slider.value);
-})
+});
 
 function Gridremove(){
     const removeSketchList = document.querySelectorAll('.sketch');
