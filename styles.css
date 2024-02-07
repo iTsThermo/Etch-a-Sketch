@@ -29,11 +29,11 @@
 
 #container{
     flex: 0 1 auto;
-    display: flex;
+    display: inline-flex;
     flex-flow: wrap;
     border: 20px solid #424242;
-    justify-content: center;
     width: 640px;
+    height: 640px;
 }
 
 #clear{
@@ -49,4 +49,27 @@
     font-size: 40px;
     position: relative;
     bottom: 25%;
+}
+
+#slide{
+    position: relative;
+    top: 10%;
+    background: linear-gradient(to right, #DCFFB7 0%, #fff 100%);
+    border: solid 1px #82CFD0;
+    border-radius: 8px;
+    height: 10px;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+#slide::-webkit-slider-thumb{
+  /* removing default appearance */
+  -webkit-appearance: none;
+  appearance: none;
+  /* creating a custom design */
+  height: 16px;
+  width: 16px;
+  background-color:crimson;
+  border-radius: 50%;
+  border: 1px solid black;
 }

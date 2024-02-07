@@ -1,56 +1,87 @@
-let numOfBoxes = 272;
-const root = document.getElementById('container');
+let value = 16;
 
+grid(16);
+
+function grid(value){
+    
+const root = document.getElementById('container');
+  
 let index = 0;
-while(index < numOfBoxes){
-    index++;
-    if (index % 17 == 0){
-        const break_line = document.createElement('div');
-        // break_line.style.cssText = 'flex-basis: 100%;' + 
-        //     'flex-grow: 1; margin: 0px;';
-        break_line.style.cssText = 'height: 0px; width: 100%';
-        root.appendChild(break_line);
-    }else{
-        const sketch = document.createElement('button');
-        sketch.className = 'sketch';
-        sketch.style.cssText = 'border: 1px solid black;' + 
-            'height: 40px;' + 
-            'width: 40px;' + 
-            'margin: 0px;' +
-            'background-color: #424242';
+while(index < value){
+        const sketch = document.createElement('div');
+        sketch.className = 'columns';
+        sketch.style.cssText = 'display: flex; flex-direction: column; margin: 0px';
         root.appendChild(sketch);
-    }
+        for(let i = 0; i < value; i++){
+            const row = document.createElement('button');
+            row.className = 'sketch';
+            row.style.cssText = 'flex: 1; border: 1px solid black;' + 
+                'background-color: #424242;' +
+                'height:'+ root.clientHeight/value +'px;' + 
+                'width:'+ root.clientWidth/value +'px;';
+            sketch.appendChild(row);
+        }
+    index++;
 }
 
 const sketchList = document.querySelectorAll('.sketch');
-
-let pressed = false;
-
-window.addEventListener("mousedown", () =>{pressed = true;});
-
-window.addEventListener("mouseup", () =>{pressed = false;});
 
 sketchList.forEach(sketch => {
     sketch.addEventListener("mouseover", () => {
         if (pressed){
         sketch.style.cssText = 'border: 1px solid black;' + 
-        'height: 40px;' + 
-        'width: 40px;' + 
+        'height:'+ root.clientHeight/value +'px;' + 
+        'width:'+ root.clientHeight/value +'px;' +
         'margin: 0px;'+ 
         'background: #DCFFB7;';
         }
     });
-});
+})
+
+let pressed = false;
+window.addEventListener("mousedown", () =>{pressed = true;});
+window.addEventListener("mouseup", () =>{pressed = false;});
+
+function reset(){
+    const removeSketchList = document.querySelectorAll('.sketch');
+    removeSketchList.forEach(sketch =>{
+        sketch.remove();
+    });
+}
 
 const clear = document.getElementById('clear');
+clear.addEventListener('click', reset);
 
-clear.addEventListener('click', ()=>{
-    sketchList.forEach(sketch=>{sketch.style.cssText = 'border: 1px solid black;' + 
-    'height: 40px;' + 
-    'width: 40px;' + 
-    'margin: 0px;' +
-    'background-color: #424242';
-    })
+sketchList.forEach(sketch => {
+    sketch.addEventListener("mouseover", () => {
+        if (pressed){
+            sketch.style.cssText = 'border: 1px solid black;' + 
+            'height:'+ root.clientHeight/value +'px;' + 
+            'width:'+ root.clientHeight/value +'px;' +
+            'margin: 0px;'+ 
+            'background: #DCFFB7;';
+        }
+    });
+    clear.addEventListener('click', reset);
+});
+}
+
+const slider = document.getElementById('slide');
+slider.addEventListener("input", function() {
+    Gridremove();
+    grid(slider.value);
 })
+
+function Gridremove(){
+    const removeSketchList = document.querySelectorAll('.sketch');
+    removeSketchList.forEach(sketch =>{
+        sketch.remove();
+    });
+}
+
+
+
+
+
 
 
